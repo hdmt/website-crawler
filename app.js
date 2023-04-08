@@ -2,7 +2,9 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
 
+// Site url to crawl
 const startUrl = 'https://example.com/';
+
 const visitedUrls = new Set();
 const urlTitleList = [];
 
@@ -39,7 +41,8 @@ async function crawl(url) {
         const parsedUrl = new URL(absoluteUrl);
 
         if (parsedUrl.hostname === new URL(startUrl).hostname) {
-          await new Promise((resolve) => setTimeout(resolve, 500));
+          // クロール先の負荷調整のため時間を調整する場合
+          // await new Promise((resolve) => setTimeout(resolve, 500));
           await crawl(absoluteUrl);
         }
       }
